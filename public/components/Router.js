@@ -6,6 +6,7 @@ import Home from "./Home"
 import Page404 from "./Page404"
 import Footer from "./Footer"
 import Register from "./Register"
+import Login from "./Login"
 import Contact from "./Contact"
 import Aboutus from "./Aboutus"
 
@@ -24,6 +25,8 @@ class Router extends React.Component{
                 <Route path="/contact" exact component={null} />
                 <Route path="/aboutus" exact component={null} /> 
                 <Route path="/register" exact component={Register} /> 
+                <Route path="/login" exact component={Login} /> 
+
                 <Route path="/"  component={Page404} />
                 </Switch>
                 {/* here Cann be footer */}

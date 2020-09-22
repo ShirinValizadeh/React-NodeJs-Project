@@ -55,12 +55,14 @@ if (bookTitle && bookDescription && bookPdf && Object.keys( req.files).length > 
         res.json(1)
     }).catch(error => {
         if (error == 3) {
-            res.json(3)
+            res.json(3) // booktitle exist
+        }else{
+            res.json(4) //sserver side error
         }
     })
 
 } else {
-    res.json(2)
+    res.json(2) // missing 
 }
 } else {
     res.json(2)

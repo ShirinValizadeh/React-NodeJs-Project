@@ -2,9 +2,10 @@ const passwordHash = require('password-hash')
 // const {MongoClient, ObjectID} = require('mongodb')
 const mongoose = require('mongoose')
 const fs = require('fs')
-const connectionString = 'mongodb+srv://fbw5:5vT2OVt8eSTwntF8@cluster0-rmrmn.mongodb.net/test1?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://fbw5:KDn7bW9QqdoaxqrX@cluster0.hjd09.mongodb.net/test1?retryWrites=true&w=majority'
+//mongodb+srv://fbw5:KDn7bW9QqdoaxqrX@cluster0.hjd09.mongodb.net/test1?retryWrites=true&w=majority
 
-
+//SDKOjM3nHNwPoBJE
 // get Schema object
 const Schema = mongoose.Schema
 // creat new users schema

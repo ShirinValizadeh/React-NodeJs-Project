@@ -13,7 +13,9 @@ const sessionOptions = {
     cookie: {}
 }
 app.use(session(sessionOptions))
-
+app.use(fileupload({
+    limits: { fileSize: 50 * 1024 * 1024 }
+}))
 
 const port = process.env.PORT || 5000
 
@@ -65,9 +67,35 @@ app.post('/login', (req, res) => {
     
 });
 
+
 //**********admin ********************** */
 app.use('/admin',adminRout)
     
+
+
+//**********************************getAllBooks */
+app.post('/getAllBooks', (req, res) => {
+    dataModule.getAllBooks().then(books=>{
+        res.json(books)
+    }).catch(err=>{
+        res.json(2)
+    })
+});
+
+
+
+//*******************getBook********* */
+app.post('/getBook', (req, res) => {
+    const bookId = req.body.id
+    dataModule.getBook(bookId).then(data => {
+       res.json({
+           book:data,
+           login:req.session.user != null
+       })
+    }).catch(error => {
+        res.json(2)
+    })
+});
 
 
 app.use('/' , (req,res)=>{

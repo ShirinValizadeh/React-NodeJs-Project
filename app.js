@@ -3,10 +3,17 @@ const session = require('express-session')
 const fileupload = require('express-fileupload')
 const fs = require('fs')
 const dataModule = require('./modules/mongooseDataModule')
+const adminRout = require('./routs/adminRoutes')
 const app = express()
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+const sessionOptions = {
+    secret: 'bookStore',
+    cookie: {}
+}
+app.use(session(sessionOptions))
+
 
 const port = process.env.PORT || 5000
 
@@ -44,12 +51,12 @@ app.post('/login', (req, res) => {
     if (req.body.email && req.body.password) {
         dataModule.checkUser(req.body.email.trim(), req.body.password).then(user => {
             req.session.user = user
-            res.json(1)
+            res.json(1) //success
         }).catch(error => {
             if (error == 3) {
-                res.json(3)
+                res.json(3) //pass wrong
             } else {
-                res.json(4)
+                res.json(4) //user not exist
             }
         })
     } else {
@@ -58,6 +65,9 @@ app.post('/login', (req, res) => {
     
 });
 
+//**********admin ********************** */
+app.use('/admin',adminRout)
+    
 
 
 app.use('/' , (req,res)=>{

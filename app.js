@@ -88,10 +88,13 @@ app.post('/getAllBooks', (req, res) => {
 app.post('/getBook', (req, res) => {
     const bookId = req.body.id
     dataModule.getBook(bookId).then(data => {
-       res.json({
-           book:data,
-           login:req.session.user != null
-       })
+        // check if user is loging can see pdf 
+        if (!req.session.user) {
+            data.pdfUrl = null
+        }
+            res.json(data)
+        
+
     }).catch(error => {
         res.json(2)
     })

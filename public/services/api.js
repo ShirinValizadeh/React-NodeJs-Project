@@ -142,6 +142,7 @@ export const getAllBooks = ()=>{
 //***********GET BOOK****************** */
 export const getBookPost= (bookId)=>{
     return new Promise((resolve , reject)=>{
+        
         const data ={
             id:bookId
         }
@@ -150,10 +151,11 @@ export const getBookPost= (bookId)=>{
             headers: {
                 'Content-Type': 'application/json'
             },
-            body:json.stringify(data)
+            body:JSON.stringify(data)
         }).then(response =>{
             if (response.status === 200) {
                 response.json().then(data=>{
+                  //  console.log(data);
                     resolve(data)
                 }).catch(err=>{
                     reject(err)

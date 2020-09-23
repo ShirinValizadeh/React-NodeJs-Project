@@ -13,7 +13,7 @@ const Shop = () => {
 
     useEffect(() => {
         getAllBooks().then(data => {
-            console.log(data);
+          //  console.log(data);
             if (data != 2) {
                  setState({ ...state, books: data })
             }

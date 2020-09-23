@@ -12,6 +12,7 @@ import AddBook from './AddBook'
 import Shop from "./Shop"
 import Aboutus from "./Aboutus"
 import Book from './Book'
+import MyBooks from './MyBooks'
 
 class Router extends React.Component{
     render(){
@@ -29,9 +30,12 @@ class Router extends React.Component{
                 <Route path="/register" exact component={Register} /> 
                 <Route path="/login" exact component={Login} /> 
                 <Route path="/admin/addbook" exact component={AddBook} /> 
+             <Route path='/admin/mybooks' exact component={MyBooks} />
                 <Route path='/admin' exact component={Admin} />
                 <Route path='/shop' exact component={Shop} />
                 <Route path='/book/:title/:id' exact component={Book} />
+                
+
                 <Route path="/"  component={Page404} />
                 </Switch>
                 {/* here Cann be footer */}

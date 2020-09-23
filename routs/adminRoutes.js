@@ -69,13 +69,15 @@ if (bookTitle && bookDescription && bookPdf && Object.keys( req.files).length > 
 }
 
 })
-/* adminRouter.get('/mybooks', (req, res) => {
+
+//**************mybooks************************** */
+ adminRouter.post('/mybooks', (req, res) => {
     dataModule.userBooks(req.session.user._id).then(books => {
-        res.render('mybooks', {books})
+        res.json(books)
     }).catch(error => {
-        res.send("404. page can not be found");
+        res.json(2)
     })
-}) */
+}) 
 
 /* adminRouter.get('/logout', (req, res) => {
     req.session.destroy()
@@ -123,6 +125,9 @@ res.json(2)
     })
 })
 
+
+
+//**************mybooks************************** */
 adminRouter.post('/deletebook', (req, res) => {
     const bookid = req.body.bookid
     dataModule.deleteBook(bookid, req.session.user._id).then(() => {
@@ -131,5 +136,7 @@ adminRouter.post('/deletebook', (req, res) => {
         res.json(2)
     })
 })
+
+
 
 module.exports = adminRouter

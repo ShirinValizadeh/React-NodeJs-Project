@@ -58,11 +58,8 @@ const Book = () => {
 
                                 <div className="btn-sec">
                                     {state.book.pdfUrl  ? <a href={state.book.pdfUrl} target="_blank" className="btn btn-success">download</a> :<Link to="/login" className="btn btn-success">Login for Download</Link>}
-                                        
-                                        
-
-
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

@@ -19,7 +19,10 @@ const Book = () => {
         getBookPost(params.id).then(data => {
             console.log(data);
             //update state to add data
-            setState({ ...state, book: data })
+            if (data != 2) {
+                 setState({ ...state, book: data })
+            }
+           
         }).catch(err => {
             console.log(err);
         })

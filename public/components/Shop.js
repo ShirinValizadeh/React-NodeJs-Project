@@ -15,6 +15,7 @@ const Shop = () => {
         getAllBooks().then(data => {
           //  console.log(data);
             if (data != 2) {
+                
                  setState({ ...state, books: data })
             }
            

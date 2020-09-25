@@ -201,3 +201,69 @@ export const MyBooksPost= ()=>{
 
 
 //*****************************************DELET BOOK************ */
+export const deletBooksPost= (bookid)=>{
+    return new Promise((resolve , reject)=>{
+    
+        const data={
+            bookid
+        }
+        fetch('/admin/deletebook' ,{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(data)
+        }).then(response =>{
+            if (response.status === 200) {
+                response.json().then(data=>{
+                  //  console.log(data);
+                    resolve(data)
+                }).catch(err=>{
+                    reject(err)
+                })
+            }else{
+                reject(new Error('can not send data to server . status: ' + response.status))
+            }
+        }).catch(err =>{
+            reject(err)
+        })
+    })
+}
+
+
+
+//*****************************************edit BOOK************ */
+export const editBooksPost= (bookTitle , bookDescription , bookOldImgs , bookNewImgs , bookPdf , bookid)=>{
+    return new Promise((resolve , reject)=>{
+        const fd = new FormData()
+        fd.append('bookid' , bookid)
+        fd.append('newBookTitle' , bookTitle)
+        fd.append('oldImgsUrls' ,JSON.stringify(bookOldImgs) )
+        for (let i = 0; i < bookNewImgs.length; i++) {
+            fd.append('bookImg' + i, bookNewImgs[i])
+        }
+        if (bookPdf) {
+            fd.append('bookPdf', bookPdf)
+        }
+        fd.append('bookDescription' , bookDescription)
+
+
+        fetch('/admin/editbook' ,{
+            method:'POST',
+            body:fd
+        }).then(response =>{
+            if (response.status === 200) {
+                response.json().then(data=>{
+                  //  console.log(data);
+                    resolve(data)
+                }).catch(err=>{
+                    reject(err)
+                })
+            }else{
+                reject(new Error('can not send data to server . status: ' + response.status))
+            }
+        }).catch(err =>{
+            reject(err)
+        })
+    })
+}

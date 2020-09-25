@@ -47,8 +47,7 @@ if (bookTitle && bookDescription && bookPdf && Object.keys( req.files).length > 
     const imgs = []
     for (const key in req.files) {
         if (req.files[key].mimetype != 'application/pdf') {
-            imgs.push(req.files[key])
-            
+            imgs.push(req.files[key])  
         }
     }
     dataModule.addBook(bookTitle, bookDescription, bookPdf, imgs, req.session.user._id ).then(() => {
@@ -79,10 +78,12 @@ if (bookTitle && bookDescription && bookPdf && Object.keys( req.files).length > 
     })
 }) 
 
-/* adminRouter.get('/logout', (req, res) => {
+
+//**************logout************************** */
+ adminRouter.post('/logout', (req, res) => {
     req.session.destroy()
-    res.redirect('/login')
-}) */
+    res.json(10)
+}) 
 
 /* adminRouter.get('/mybook/:id', (req, res) => {
     const bookid = req.params.id
@@ -92,6 +93,10 @@ if (bookTitle && bookDescription && bookPdf && Object.keys( req.files).length > 
         res.send("this book is not exist");
     })
 }) */
+
+
+
+//**************edit book************************** */
 adminRouter.post('/editbook', (req, res) => {
     const {newBookTitle, oldImgsUrls, bookDescription, bookid} = req.body
     //console.log(newBookTitle, oldImgsUrls, bookDescription, bookid )
@@ -111,13 +116,10 @@ adminRouter.post('/editbook', (req, res) => {
     let oldImgsUrlsArr =  JSON.parse(oldImgsUrls)
     //console.log(oldImgsUrlsArr);
 // delete the domain from the imags urls
-
     oldImgsUrlsArr = oldImgsUrlsArr.map(element => {
         return element.substr(element.indexOf('/uploadedfiles/'))
     })
-
     //console.log(oldImgsUrlsArr);
-    
     dataModule.updateBook(bookid, newBookTitle, oldImgsUrlsArr, bookDescription, newPdfBook, newImgs, req.session.user._id ).then((book) => {
 res.json(book)
     }).catch(error => {
@@ -132,7 +134,7 @@ res.json(book)
 
 
 
-//**************mybooks************************** */
+//**************deletebook************************** */
 adminRouter.post('/deletebook', (req, res) => {
     const bookid = req.body.bookid
     dataModule.deleteBook(bookid, req.session.user._id).then(() => {

@@ -1,11 +1,18 @@
-import React, { useState } from "react"
+import React, { useState , useEffect} from "react"
 import { Link ,useHistory} from "react-router-dom"
+import {connect} from "react-redux"
 
 import PopUpModal from "./PopUpModal"
 import { loginPost } from "../services/api"
+import {setUserAction} from "../actions"
 
+const Login = (props) => {
 
-const Login = () => {
+//kill user > after logout or sfter kill the session
+  useEffect(() => {
+   props.setUserAction(null)
+
+  }, [])
 
 const history = useHistory()
 
@@ -49,15 +56,17 @@ const history = useHistory()
             setMyState({ ...myState, entriesError: true, errorElement: <p>the email is not Exist</p>, errorTitle: 'user not exist' })
             break;
             case 1:
+              // user
+            props.setUserAction(myState.email)
            //show admin panell
-           history.push('/admin' , myState.email)
+           history.push('/admin')
          // console.log('success');
                 break;
           default:
             break;
         }
       }).catch(err => {
-
+          console.log(err);
       })
     }
 
@@ -128,4 +137,6 @@ const history = useHistory()
   )
 }
 
-export default Login
+
+
+export default connect(null , {setUserAction})(Login) 

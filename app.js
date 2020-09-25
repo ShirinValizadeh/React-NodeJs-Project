@@ -101,10 +101,29 @@ app.post('/getBook', (req, res) => {
 });
 
 
+//*******checkLoginPost each time*********** */
+
+app.post('/checklogin', (req, res) => {
+            if (req.session.user) {
+                res.json(req.session.user.email)
+            }else{
+                res.json(10)
+            }
+});     
+
+
+
 app.use('/' , (req,res)=>{
     const html = fs.readFileSync(__dirname + '/index.html' , 'utf-8')
     res.send(html)
 })
+
+
+
+
+
+
+
 
 
 app.listen(port, () => {

@@ -25,7 +25,7 @@ const MyBook = () => {
     useEffect(() => {
         //call func from api here to get all data using params
         getBookPost(params.id).then(data => {
-            console.log(data);
+           // console.log(data);
             switch (data) {
                 case 2:
                     console.log('server Error');
@@ -154,7 +154,7 @@ const MyBook = () => {
                         break;
                 }
             }).catch(err => {
-                console.log(err);
+              //  console.log(err);
             })
         } else {
             const errElement = (

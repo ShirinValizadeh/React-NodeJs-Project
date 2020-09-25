@@ -22,7 +22,7 @@ const MyBooks = () => {
 
     useEffect(() => {
         MyBooksPost().then(data => {
-            console.log(data);
+            //console.log(data);
             switch (data) {
                 case 10:
                     history.push('/login')

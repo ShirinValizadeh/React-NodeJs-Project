@@ -267,3 +267,59 @@ export const editBooksPost= (bookTitle , bookDescription , bookOldImgs , bookNew
         })
     })
 }
+
+
+//*****************************************LOGOUT ************ */
+export const logoutPost= ()=>{
+    return new Promise((resolve , reject)=>{
+
+        fetch('/admin/logout' ,{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response =>{
+            if (response.status === 200) {
+                response.json().then(data=>{
+                  //  console.log(data);
+                    resolve(data)
+                }).catch(err=>{
+                    reject(err)
+                })
+            }else{
+                reject(new Error('can not send data to server . status: ' + response.status))
+            }
+        }).catch(err =>{
+            reject(err)
+        })
+    })
+}
+
+
+
+//*******checkLoginPost each time*********** */
+export const checkLoginPost= ()=>{
+    return new Promise((resolve , reject)=>{
+
+        fetch('/checklogin' ,{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response =>{
+            if (response.status === 200) {
+                response.json().then(data=>{
+                  //  console.log(data);
+                    resolve(data)
+                }).catch(err=>{
+                    reject(err)
+                })
+            }else{
+                reject(new Error('can not send data to server . status: ' + response.status))
+            }
+        }).catch(err =>{
+            reject(err)
+        })
+    })
+}
+

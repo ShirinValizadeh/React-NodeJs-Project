@@ -1,6 +1,6 @@
 import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-
+import {connect} from 'react-redux'
 import NavigationBar from "./NavigationBar"
 import Home from "./Home"
 import Page404 from "./Page404"
@@ -15,8 +15,17 @@ import Book from './Book'
 import MyBooks from './MyBooks'
 import MyBook from './MyBook'
 import CheckLogin from "./CheckLogin"
+import {checkLoginPost} from './services/api'
+import {setUserAction} from "../actions"
 
 class Router extends React.Component {
+    componentDidMount(){
+        checkLoginPost().then(data =>{
+            if (data != 10) {
+               this.props.setUserAction(data)
+            }
+        })
+    }
     render() {
         return (
             <BrowserRouter>
@@ -49,4 +58,4 @@ class Router extends React.Component {
 }
 
 
-export default Router
+export default connect(null ,{setUserAction} )(Router) 

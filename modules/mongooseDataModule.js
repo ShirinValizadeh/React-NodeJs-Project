@@ -49,6 +49,8 @@ const Users = mongoose.model('users', usersSchema)
 // creat Books model
 const Books = mongoose.model('books', bookSchema)
 
+
+
 function connect() {
     return new Promise((resolve, reject) => {
         if (mongoose.connection.readyState === 1) {
@@ -66,6 +68,10 @@ function connect() {
         }
     })
 }
+
+
+
+//*********************REGISTER USER******************************** */
 
 function registerUser(email, password) {
     return new Promise((resolve, reject) => {
@@ -93,6 +99,9 @@ function registerUser(email, password) {
     })
 }
 
+
+
+//*****************************CHECK USER LOGIN************************ */
 function checkUser(email, password) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -112,6 +121,12 @@ function checkUser(email, password) {
         })
     })
 }
+
+
+
+
+
+//*******************ADD NEW BOOK********************************** */
 function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -160,6 +175,10 @@ function addBook(bookTitle, bookDescription, bookPdf, bookImgs, userid) {
         })
     })
 }
+
+
+
+//**************************GET ALL BOOKS*************************** */
 function getAllBooks() {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -186,7 +205,7 @@ function getAllBooks() {
 
 
 
-//***************************************************** */
+//**************************GET SINGLE BOOK*************************** */
 function getBook(id) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -211,7 +230,7 @@ function getBook(id) {
 
 
 
-//***************************************************** */
+//*********************USER BOOK******************************** */
 function userBooks(userid) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -238,7 +257,7 @@ function userBooks(userid) {
 
 
 
-//***************************************************** */
+//*********************UPDATE BOOK******************************** */
 function updateBook(bookid, newBookTitle, oldImgsUrls, bookDescription, newPdfBook, newImgs, userid) {
     return new Promise((resolve, reject) => {
         try {
@@ -313,7 +332,7 @@ function updateBook(bookid, newBookTitle, oldImgsUrls, bookDescription, newPdfBo
 }
 
 
-//***************************************************** */
+//*********************DELETE BOOK******************************** */
 function deleteBook(bookid, userid) {
     return new Promise((resolve, reject) => {
         getBook(bookid).then(book => {
@@ -353,6 +372,7 @@ function deleteBook(bookid, userid) {
 
 }
 module.exports = {
+    connect,
     registerUser,
     checkUser,
     addBook,

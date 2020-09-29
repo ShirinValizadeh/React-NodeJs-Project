@@ -72,7 +72,6 @@ function connect() {
 
 
 //*********************REGISTER USER******************************** */
-
 function registerUser(email, password) {
     return new Promise((resolve, reject) => {
         connect().then(() => {

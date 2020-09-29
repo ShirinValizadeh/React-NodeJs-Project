@@ -18,6 +18,7 @@
     "password-hash": "^1.2.2"
   },
   "devDependencies": {
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "puppeteer": "^5.3.1"
   }
 }
